@@ -1,6 +1,6 @@
 {
   "name": "@fcostarodrigo/open-path",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "Node module that creates missing folders in the middle of a path",
   "main": "src/index.js",
   "types": "src/index.d.ts",
