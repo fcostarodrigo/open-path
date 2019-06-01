@@ -1,0 +1,52 @@
+{
+  "name": "@fcostarodrigo/open-path",
+  "version": "3.1.0",
+  "description": "Node module that creates missing folders in the middle of a path",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "scripts": {
+    "precommit": "pretty-quick --staged && npm test",
+    "test": "jest unit int --coverage",
+    "pretest": "eslint src",
+    "unit-test": "jest unit --watch",
+    "format": "pretty-quick"
+  },
+  "bin": "src/cli.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcostarodrigo/open-path.git"
+  },
+  "keywords": [
+    "nested",
+    "directories",
+    "folders",
+    "mkdir -p",
+    "recursive",
+    "recursively",
+    "path"
+  ],
+  "author": "Rodrigo Fernandes da Costa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fcostarodrigo/open-path/issues"
+  },
+  "homepage": "https://github.com/fcostarodrigo/open-path#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.10.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jest": "^21.27.2",
+    "eslint-plugin-prettier": "^2.7.0",
+    "husky": "^0.14.3",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1",
+    "pretty-quick": "^1.11.0"
+  },
+  "dependencies": {
+    "yargs": "^13.2.4"
+  }
+}
