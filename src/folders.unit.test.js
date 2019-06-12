@@ -1,8 +1,16 @@
 const folders = require("./folders");
 
 describe("folders", () => {
+  it("should return a single folder when passed a single folder", () => {
+    expect(folders("a")).toEqual(["a"]);
+  });
+
   it("should list relative folders", () => {
     expect(folders("a/b/c")).toEqual(["a", "a/b", "a/b/c"]);
+  });
+
+  it("should normalize its input", () => {
+    expect(folders("a/b/c/d.e/")).toEqual(["a", "a/b", "a/b/c", "a/b/c/d.e"]);
   });
 
   it("should include last item by default", () => {
