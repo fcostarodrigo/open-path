@@ -92,9 +92,9 @@ If installed locally, command `open-path` is available in scripts in `package.js
 function openPath(pathToOpen: string, fileInPath?: boolean): Promise<void>;
 ```
 
-- `pathToOpen`: String with the path.
-- `fileInPath`: Indicates if the last item of the path is a file.
-- `promise`: Resolves to nothing after the directories are created or rejects with an error.
+`pathToOpen`: String with the path.
+
+`fileInPath`: Indicates if the last item of the path is a file.
 
 ## Development
 
