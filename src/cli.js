@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
 
 const yargs = require("yargs");
 const openPath = require("./index");
@@ -18,6 +17,8 @@ const builder = command =>
     });
 
 const handler = ({ pathToOpen, fileInPath }) =>
-  openPath(pathToOpen, fileInPath).catch(error => console.error(error));
+  openPath(pathToOpen, fileInPath).catch(error =>
+    process.stdout.write(`${error}\n`)
+  );
 
 yargs.command("* <pathToOpen>", false, builder, handler).parse();

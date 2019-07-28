@@ -4,12 +4,19 @@ const folders = require("./folders");
 
 const mkdir = util.promisify(fs.mkdir);
 
-const openPath = async (pathToOpen, fileInPath) => {
-  const ignoreExistError = error =>
-    error.code === "EEXIST" ? Promise.resolve() : Promise.reject(error);
+const mkdirExist = async folder => {
+  try {
+    await mkdir(folder);
+  } catch (error) {
+    if (error.code !== "EEXIST") {
+      throw error;
+    }
+  }
+};
 
+const openPath = async (pathToOpen, fileInPath) => {
   for (const folder of folders(pathToOpen, fileInPath)) {
-    await mkdir(folder).catch(ignoreExistError);
+    await mkdirExist(folder);
   }
 };
 
