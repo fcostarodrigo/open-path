@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/fcostarodrigo/open-path.svg?branch=master)](https://travis-ci.org/fcostarodrigo/open-path)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b6946e0ba8f338beb200/maintainability)](https://codeclimate.com/github/fcostarodrigo/open-path/maintainability)
+[![codebeat badge](https://codebeat.co/badges/3b4d7e76-0f0d-45de-bca3-4c1a1e0d2e5f)](https://codebeat.co/projects/github-com-fcostarodrigo-open-path-master)
 [![codecov](https://codecov.io/gh/fcostarodrigo/open-path/branch/master/graph/badge.svg)](https://codecov.io/gh/fcostarodrigo/open-path)
 
 Node module that creates missing folders in the middle of a path, like `mkdir -p`.
