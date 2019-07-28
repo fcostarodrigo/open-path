@@ -55,28 +55,4 @@ describe("openPath", () => {
 
     await expect(openPath(file)).rejects.toBe(error);
   });
-
-  it("should work with callbacks", done => {
-    const folder = "a/b.c/d/";
-
-    mockMkDir([
-      { dir: "a", result: null },
-      { dir: "a/b.c", result: null },
-      { dir: "a/b.c/d", result: null }
-    ]);
-
-    openPath(folder, false, done);
-  });
-
-  it("should pass errors to the callback", done => {
-    const folder = "a/b.c";
-    const error = new Error("error");
-
-    mockMkDir([{ dir: "a", result: error }]);
-
-    openPath(folder, true, err => {
-      expect(err).toBe(error);
-      done();
-    });
-  });
 });

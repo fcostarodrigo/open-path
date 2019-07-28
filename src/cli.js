@@ -18,8 +18,6 @@ const builder = command =>
     });
 
 const handler = ({ pathToOpen, fileInPath }) =>
-  openPath(pathToOpen, fileInPath)
-    .then(() => {})
-    .catch(error => console.error(error));
+  openPath(pathToOpen, fileInPath).catch(error => console.error(error));
 
 yargs.command("* <pathToOpen>", false, builder, handler).parse();
