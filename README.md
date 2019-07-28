@@ -1,5 +1,6 @@
 # OPEN-PATH
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dad031acb18b47e591a1656913e0f8cc)](https://app.codacy.com/app/fcostarodrigo/open-path?utm_source=github.com&utm_medium=referral&utm_content=fcostarodrigo/open-path&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/fcostarodrigo/open-path.svg?branch=master)](https://travis-ci.org/fcostarodrigo/open-path)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b6946e0ba8f338beb200/maintainability)](https://codeclimate.com/github/fcostarodrigo/open-path/maintainability)
 [![codebeat badge](https://codebeat.co/badges/3b4d7e76-0f0d-45de-bca3-4c1a1e0d2e5f)](https://codebeat.co/projects/github-com-fcostarodrigo-open-path-master)
