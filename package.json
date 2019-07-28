@@ -9,7 +9,8 @@
     "test": "jest unit int --coverage",
     "pretest": "eslint src",
     "unit-test": "jest unit --watch",
-    "format": "pretty-quick"
+    "format": "pretty-quick",
+    "publish": "np"
   },
   "bin": "src/cli.js",
   "repository": {
