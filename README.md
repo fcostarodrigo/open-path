@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/fcostarodrigo/open-path.svg?branch=master)](https://travis-ci.org/fcostarodrigo/open-path)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b6946e0ba8f338beb200/maintainability)](https://codeclimate.com/github/fcostarodrigo/open-path/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/b6946e0ba8f338beb200/test_coverage)](https://codeclimate.com/github/fcostarodrigo/open-path/test_coverage)
 
 Node module that creates missing folders in the middle of a path, like `mkdir -p`.
 
