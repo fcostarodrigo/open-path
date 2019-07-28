@@ -7,18 +7,18 @@ const builder = command =>
   command
     .positional("pathToOpen", {
       describe: "String with the path",
-      type: "string"
+      type: "string",
     })
     .option("fileInPath", {
       alias: "f",
       describe: "Indicates if the last item of the path is a file",
       defaults: false,
-      type: "boolean"
+      type: "boolean",
     });
 
 const handler = ({ pathToOpen, fileInPath }) =>
   openPath(pathToOpen, fileInPath).catch(error =>
-    process.stdout.write(`${error}\n`)
+    process.stdout.write(`${error}\n`),
   );
 
 yargs.command("* <pathToOpen>", false, builder, handler).parse();

@@ -1,20 +1,13 @@
-const fs = require("fs");
-const util = require("util");
 const folders = require("./folders");
+const mkdirExist = require("./mkdirExist");
 
-const mkdir = util.promisify(fs.mkdir);
-
-const mkdirExist = async folder => {
-  try {
-    await mkdir(folder);
-  } catch (error) {
-    if (error.code !== "EEXIST") {
-      throw error;
-    }
-  }
-};
-
-const openPath = async (pathToOpen, fileInPath) => {
+/**
+ * Creates missing folders in the middle of a path
+ *
+ * @param {string} pathToOpen
+ * @param {boolean} fileInPath
+ */
+const openPath = async (pathToOpen, fileInPath = false) => {
   for (const folder of folders(pathToOpen, fileInPath)) {
     await mkdirExist(folder);
   }
