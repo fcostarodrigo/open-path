@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "scripts": {
-    "precommit": "pretty-quick --staged && npm test",
     "test": "jest unit int --coverage",
     "pretest": "eslint src",
     "unit-test": "jest unit --watch",
@@ -48,5 +47,10 @@
   },
   "dependencies": {
     "yargs": "^13.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm test"
+    }
   }
 }
