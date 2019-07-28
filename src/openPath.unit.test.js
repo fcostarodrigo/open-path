@@ -1,16 +1,7 @@
-const fs = require("fs");
+const mkdirExist = require("./mkdirExist");
 const openPath = require("./openPath");
 
-jest.mock("fs");
-
-const mockMkDir = results => {
-  for (const { dir: expectedDir, result } of results) {
-    fs.mkdir.mockImplementationOnce((dir, callback) => {
-      expect(dir).toBe(expectedDir);
-      callback(result);
-    });
-  }
-};
+jest.mock("./mkdirExist");
 
 describe("openPath", () => {
   beforeAll(() => {
@@ -18,41 +9,22 @@ describe("openPath", () => {
   });
 
   it("should create folders recursively", async () => {
-    const file = "a/b/c/d/e.f";
+    mkdirExist.mockResolvedValue(null);
 
-    mockMkDir([
-      { dir: "a", result: null },
-      { dir: "a/b", result: null },
-      { dir: "a/b/c", result: null },
-      { dir: "a/b/c/d", result: null },
-      { dir: "a/b/c/d/e.f", result: null }
+    await openPath("a/b/c/d/e.f");
+
+    expect(mkdirExist.mock.calls).toEqual([
+      ["a"],
+      ["a/b"],
+      ["a/b/c"],
+      ["a/b/c/d"],
+      ["a/b/c/d/e.f"],
     ]);
-
-    await openPath(file);
   });
 
-  it("should use the last folder of a path", async () => {
-    const folder = "a/b/c/d.e/";
-
-    mockMkDir([
-      { dir: "a", result: null },
-      { dir: "a/b", result: null },
-      { dir: "a/b/c", result: null },
-      { dir: "a/b/c/d.e", result: null }
-    ]);
-
-    await openPath(folder);
-  });
-
-  it("should fail if there are files in place of folders", async () => {
-    const file = "a/file/b/c.d";
-    const error = { code: "ENOTDIR" };
-
-    mockMkDir([
-      { dir: "a", result: { code: "EEXIST" } },
-      { dir: "a/file", result: error }
-    ]);
-
-    await expect(openPath(file)).rejects.toBe(error);
+  it("should propagate folder creation errors", async () => {
+    const error = new Error();
+    mkdirExist.mockRejectedValue(error);
+    await expect(openPath("a/file/b/c.d")).rejects.toBe(error);
   });
 });
