@@ -11,7 +11,7 @@ Node module that creates missing folders in the middle of a path, like `mkdir -p
 
 Let's say you want to create the file `docs/UI/button.txt`, but the folders `UI` and `docs` don't exist.
 
-If you just try to create the file, this happens:
+If you just try to write to `docs/UI/button.txt`, this will happen:
 
 ```js
 > fs.writeFileSync('docs/UI/button.txt', 'test')
@@ -25,7 +25,7 @@ Thrown:
   path: 'docs/UI/button.txt' }
 ```
 
-If you try to create the folder you get this:
+If you try to create the folder you will get this:
 
 ```js
 > fs.mkdirSync('docs/UI')
@@ -40,9 +40,12 @@ Using this library you can create the inner folders easily:
 ```js
 const openPath = require("@fcostarodrigo/open-path");
 
-openPath("docs/UI/button.txt", true).then(() => {
+async function main() {
+  await openPath("docs/UI/button.txt", true);
   fs.writeFileSync("docs/UI/button.txt", "test");
-});
+}
+
+main();
 ```
 
 ## Installation
@@ -55,33 +58,13 @@ npm install @fcostarodrigo/open-path
 
 ```js
 const openPath = require("@fcostarodrigo/open-path");
-```
 
-### Callbacks
-
-```js
-openPath("docs/UI/button.txt", true, error => {
-  if (error) throw error;
-
-  console.log("done");
-});
-```
-
-### Promises
-
-```js
-openPath("docs/UI")
-  .then(() => console.log("done"))
-  .catch(error => console.error(error));
-```
-
-### Async await
-
-```js
-async function() {
+async function main() {
   await openPath("docs/UI");
-  fs.writeFileSync('docs/UI/button.txt', 'test');
+  fs.writeFileSync("docs/UI/button.txt", "test");
 }
+
+main();
 ```
 
 ### CLI
@@ -105,16 +88,11 @@ If installed locally, command `open-path` is available in scripts in `package.js
 ## Documentation
 
 ```ts
-function openPath(
-  pathToOpen: string,
-  fileInPath?: boolean,
-  callback?: (error?: Error) => void
-): Promise<void>;
+function openPath(pathToOpen: string, fileInPath?: boolean): Promise<void>;
 ```
 
 - `pathToOpen`: String with the path.
 - `fileInPath`: Indicates if the last item of the path is a file.
-- `callback`: Called after the directories were created or after an error.
 - `promise`: Resolves to nothing after the directories are created or rejects with an error.
 
 ## Development
