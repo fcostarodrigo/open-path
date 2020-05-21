@@ -1,19 +1,18 @@
 const fs = require("fs");
-const util = require("util");
-const openPath = require(".");
-
-const writeFile = util.promisify(fs.writeFile);
-const rmdir = util.promisify(fs.rmdir);
-const unlink = util.promisify(fs.unlink);
+const path = require("path");
+const openPath = require("./openPath");
 
 describe("openPath", () => {
+  afterAll(async () => {
+    await fs.promises.unlink(path.join("a", "b", "c", "d.e")).catch(() => {});
+    await fs.promises.rmdir(path.join("a", "b", "c")).catch(() => {});
+    await fs.promises.rmdir(path.join("a", "b")).catch(() => {});
+    await fs.promises.rmdir("a").catch(() => {});
+  });
+
   it("should open a path", async () => {
-    const file = "a/b/c/d.e";
+    const file = path.join("a", "b", "c", "d.e");
     await openPath(file, true);
-    await writeFile(file, "hello");
-    await unlink(file);
-    await rmdir("a/b/c/");
-    await rmdir("a/b/");
-    await rmdir("a/");
+    await expect(fs.promises.writeFile(file, "hello")).resolves.toBe(undefined);
   });
 });
