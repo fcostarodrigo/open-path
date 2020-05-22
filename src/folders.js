@@ -1,9 +1,10 @@
 const path = require("path");
 
-const normalize = source =>
-  path.join(path.dirname(source), path.basename(source));
+function normalize(source) {
+  return path.join(path.dirname(source), path.basename(source));
+}
 
-const folders = (source, fileInPath = false) => {
+function folders(source, fileInPath = false) {
   const list = [fileInPath ? path.dirname(source) : normalize(source)];
 
   while (list[0] !== path.dirname(list[0])) {
@@ -11,6 +12,6 @@ const folders = (source, fileInPath = false) => {
   }
 
   return list.slice(1);
-};
+}
 
 module.exports = folders;

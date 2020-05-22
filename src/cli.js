@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 const yargs = require("yargs");
-const openPath = require("./index");
+const openPath = require("./openPath");
 
-const builder = command =>
-  command
+function builder(command) {
+  return command
     .positional("pathToOpen", {
       describe: "String with the path",
       type: "string",
@@ -15,10 +16,14 @@ const builder = command =>
       defaults: false,
       type: "boolean",
     });
+}
 
-const handler = ({ pathToOpen, fileInPath }) =>
-  openPath(pathToOpen, fileInPath).catch(error =>
-    process.stdout.write(`${error}\n`),
-  );
+async function handler({ pathToOpen, fileInPath }) {
+  try {
+    await openPath(pathToOpen, fileInPath);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 yargs.command("* <pathToOpen>", false, builder, handler).parse();

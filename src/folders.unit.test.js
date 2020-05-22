@@ -1,36 +1,56 @@
+const path = require("path");
 const folders = require("./folders");
 
 describe("folders", () => {
+  it("should list folders", () => {
+    const folderPath = path.join("a", "b", "c");
+    const folderPaths = ["a", path.join("a", "b"), path.join("a", "b", "c")];
+
+    expect(folders(folderPath)).toEqual(folderPaths);
+  });
+
   it("should return a single folder when passed a single folder", () => {
-    expect(folders("a")).toEqual(["a"]);
+    const folderPath = "a";
+    const folderPaths = ["a"];
+
+    expect(folders(folderPath)).toEqual(folderPaths);
   });
 
-  it("should list relative folders", () => {
-    expect(folders("a/b/c")).toEqual(["a", "a/b", "a/b/c"]);
+  it("should normalize", () => {
+    const folderPath = path.join("a", "b", "c", "d.e") + path.sep;
+    const folderPaths = [
+      "a",
+      path.join("a", "b"),
+      path.join("a", "b", "c"),
+      path.join("a", "b", "c", "d.e"),
+    ];
+
+    expect(folders(folderPath)).toEqual(folderPaths);
   });
 
-  it("should normalize its input", () => {
-    expect(folders("a/b/c/d.e/")).toEqual(["a", "a/b", "a/b/c", "a/b/c/d.e"]);
+  it("should include last item", () => {
+    const folderPath = path.join("a", "b", "c.d");
+    const folderPaths = ["a", path.join("a", "b"), path.join("a", "b", "c.d")];
+
+    expect(folders(folderPath)).toEqual(folderPaths);
   });
 
-  it("should include last item by default", () => {
-    expect(folders("a/b/c.d")).toEqual(["a", "a/b", "a/b/c.d"]);
-  });
+  it("should ignore last item", () => {
+    const folderPath = path.join("a", "b", "c");
+    const folderPaths = ["a", path.join("a", "b")];
 
-  it("should ignore last item with argument", () => {
-    expect(folders("a/b/c/", true)).toEqual(["a", "a/b"]);
-  });
-
-  it("should list absolute paths", () => {
-    expect(folders("/a/b/c/", true)).toEqual(["/a", "/a/b"]);
+    expect(folders(folderPath, true)).toEqual(folderPaths);
   });
 
   it("should list folders named with a dot", () => {
-    expect(folders("a/b.c/d.e/f")).toEqual([
+    const folderPath = path.join("a", "b.c", "d.e", "f");
+    const folderPaths = [
       "a",
-      "a/b.c",
-      "a/b.c/d.e",
-      "a/b.c/d.e/f",
-    ]);
+      path.join("a", "b.c"),
+      path.join("a", "b.c", "d.e"),
+      path.join("a", "b.c", "d.e", "f"),
+    ];
+
+    expect(folders(folderPath)).toEqual(folderPaths);
   });
 });

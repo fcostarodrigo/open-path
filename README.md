@@ -2,60 +2,38 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dad031acb18b47e591a1656913e0f8cc)](https://app.codacy.com/app/fcostarodrigo/open-path?utm_source=github.com&utm_medium=referral&utm_content=fcostarodrigo/open-path&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/fcostarodrigo/open-path.svg?branch=master)](https://travis-ci.org/fcostarodrigo/open-path)
-[![Maintainability](https://api.codeclimate.com/v1/badges/b6946e0ba8f338beb200/maintainability)](https://codeclimate.com/github/fcostarodrigo/open-path/maintainability)
-[![codebeat badge](https://codebeat.co/badges/3b4d7e76-0f0d-45de-bca3-4c1a1e0d2e5f)](https://codebeat.co/projects/github-com-fcostarodrigo-open-path-master)
 [![codecov](https://codecov.io/gh/fcostarodrigo/open-path/branch/master/graph/badge.svg)](https://codecov.io/gh/fcostarodrigo/open-path)
 
 Node module that creates missing folders in the middle of a path, like `mkdir -p`.
 
-## Description
-
-Let's say you want to create the file `docs/UI/button.txt`, but the folders `UI` and `docs` don't exist.
-
-If you just try to write to `docs/UI/button.txt`, this will happen:
-
-```js
-> fs.writeFileSync('docs/UI/button.txt', 'test')
-Thrown:
-{ Error: ENOENT: no such file or directory, open 'docs/UI/button.txt'
-    at Object.openSync (fs.js:448:3)
-    at Object.writeFileSync (fs.js:1210:35)
-  errno: -2,
-  syscall: 'open',
-  code: 'ENOENT',
-  path: 'docs/UI/button.txt' }
-```
-
-If you try to create the folder you will get this:
-
-```js
-> fs.mkdirSync('docs/UI')
-Thrown:
-{ Error: ENOENT: no such file or directory, mkdir 'docs/UI'
-    at Object.mkdirSync (fs.js:773:3) errno: -2, syscall: 'mkdir', code: 'ENOENT', path: 'docs/UI' }
-
-```
-
-Using this library you can create the inner folders easily:
-
-```js
-const openPath = require("@fcostarodrigo/open-path");
-
-async function main() {
-  await openPath("docs/UI/button.txt", true);
-  fs.writeFileSync("docs/UI/button.txt", "test");
-}
-
-main();
-```
-
-## Installation
+## Setup
 
 ```bash
 npm install @fcostarodrigo/open-path
 ```
 
 ## Usage
+
+### CLI
+
+```bash
+npm install -g @fcostarodrigo/open-path
+openPath --help
+```
+
+```
+openPath <pathToOpen>
+
+Positionals:
+  pathToOpen  String with the path                                      [string]
+
+Options:
+  --help            Show help                                          [boolean]
+  --version         Show version number                                [boolean]
+  --fileInPath, -f  Indicates if the last item of the path is a file   [boolean]
+```
+
+### Lib
 
 ```js
 const openPath = require("@fcostarodrigo/open-path");
@@ -68,47 +46,17 @@ async function main() {
 main();
 ```
 
-### CLI
-
-Global
-
-```bash
-npm install -g @fcostarodrigo/open-path
-open-path --help
-```
-
-Local
-
-```bash
-npm install @fcostarodrigo/open-path
-./node_modules/.bin/open-path --help
-```
-
-If installed locally, command `open-path` is available in scripts in `package.json`.
-
 ## Documentation
 
-```ts
-function openPath(pathToOpen: string, fileInPath?: boolean): Promise<void>;
+```js
+openPath(pathToOpen, fileInPath);
 ```
 
 `pathToOpen`: String with the path.
 
 `fileInPath`: Indicates if the last item of the path is a file.
 
-## Development
-
-Full tests with coverage
-
-```bash
-npm test
-```
-
-Unit tests and watch for changes
-
-```bash
-npm run unit-test
-```
+Returns a promise.
 
 ## License
 
