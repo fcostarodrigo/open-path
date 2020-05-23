@@ -1,6 +1,5 @@
 const path = require("path");
 const openPath = require("./openPath");
-
 const mkdirIgnoreExist = /** @type {jest.Mock} */ (require("./mkdirIgnoreExist"));
 
 jest.mock("./mkdirIgnoreExist");
